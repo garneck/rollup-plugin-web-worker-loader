@@ -2,8 +2,10 @@ export function funcToSource(fn, sourcemapArg) {
     var sourcemap = sourcemapArg === undefined ? null : sourcemapArg;
     var source = fn.toString();
     var lines = source.split('\n');
-    lines.pop();
-    lines.shift();
+    if(lines.length > 1){
+        lines.pop();
+        lines.shift();
+    }
     var blankPrefixLength = lines[0].search(/\S/);
     var regex = /(['"])__worker_loader_strict__(['"])/g;
     for (var i = 0, n = lines.length; i < n; ++i) {
